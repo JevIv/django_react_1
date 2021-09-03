@@ -1,29 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import axios from "axios";
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Navbar from "./components/Navigation/Navbar";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import CategoryDetail from "./components/Category/CategoryDetail";
+import PostDetail from "./components/Posts/PostDetail";
 
 function App() {
-
-  const [people, setPeople] = useState([])
-
-  useEffect(() =>{
-    axios({
-      method: "GET",
-      url:"http://127.0.0.1:8000/api/test-api/"
-    }).then(response => {
-      setPeople(response.data)
-    })
-  }, []);
-
   return (
-    <div className="App">
-      <ul>
-        {people.map(p => (
-          <li key={p.id}>{p.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
+    <BrowserRouter>
+      <div className="App">
+        <Navbar/>
+        <Switch>
+          <Route path="/category/:id" exact component={CategoryDetail}/>
+          <Route path="/post/:id" exact component={PostDetail}/>
+
+        </Switch>
+      </div>
+    </BrowserRouter>
+  )
 }
 
 export default App;

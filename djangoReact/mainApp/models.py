@@ -15,7 +15,6 @@ class BlogPostQuerySet(models.QuerySet):
         return self.filter(title__icontains=post_title)
 
 
-
 class BlogPostManager(models.Manager):
     def get_queryset(self):
         return BlogPostQuerySet(self.model, using=self._db)
